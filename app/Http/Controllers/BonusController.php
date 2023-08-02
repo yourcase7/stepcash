@@ -37,6 +37,10 @@ class BonusController extends Controller
     {
         $result = $this->bonusRepository->getById($id);
 
+        $bonusHistory = $this->bonusHistoryRepository->getByUserId(Auth::user()->id);
+
+        if ($bonusHistory) return redirect('/bonus')->with('error', 'Bonus sudah diambil');
+
         return view('bonus-view', compact('result'));
     }
 

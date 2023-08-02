@@ -11,6 +11,8 @@ interface BonusHistoryRepositoryInterface
 
     public function getAll();
 
+    public function getByUserId($id);
+
     public function create(Advertisement $ads, User $user, array $data);
 
     public function update(array $data, $id);

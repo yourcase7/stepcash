@@ -23,6 +23,11 @@ class BonusHistoryRepository implements BonusHistoryRepositoryInterface
     public function getAll()
     {}
 
+    public function getByUserId($id)
+    {
+        return $this->model->where('user_id', $id)->first();
+    }
+
     public function create(Advertisement $ads, User $user, array $data)
     {
         $data = array_merge($data, ['advertisement_id' => $ads->id]);
