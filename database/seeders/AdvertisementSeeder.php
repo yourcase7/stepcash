@@ -18,7 +18,7 @@ class AdvertisementSeeder extends Seeder
         foreach ($data as $row => $value) {
             $ads = Advertisement::create([
                 'title' => 'Lee Minerale',
-                'description' => 'Minuman kemasan',
+                'description' => 'Ikuti instruksi dibawah ini untuk mendapatkan tambahan koin. 1. Follow akun instagram @https://www.instagram.com/le_mineraleid/?hl=en 2. Setelah follow masukkan username akun instagram yang sudah memfollow untuk dilakukan pengecekan.',
                 'thumbnail' => url("image/img/".$value),
                 'status' => 1,
                 'reward_coin' => rand(1,5),
