@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:convert-steps-to-coin')->dailyAt('23:00')->sendOutputTo('/var/www/html/schedule.log');
+        $schedule->command('app:convert-steps-to-coin')->everyTwoSeconds()->sendOutputTo('/var/www/html/schedule.log');
+        // $schedule->command('app:convert-steps-to-coin')->dailyAt('23:00')->sendOutputTo('/var/www/html/schedule.log');
     }
 
     /**

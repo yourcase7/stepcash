@@ -25,14 +25,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home');
-    })->name('dashboard');
 
-    // Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/sync', [HomeController::class, 'sync'])->name('sync');
 
     Route::resource('rewards', RewardsController::class);
+    // Route::get('/rewards/claim/{$id}', [RewardsController::class, 'claim'])->name('rewardclaim');
 });
 
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);

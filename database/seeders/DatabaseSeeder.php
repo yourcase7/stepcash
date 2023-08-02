@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             LevelSeeder::class,
-            CoinRateSeeder::class
+            CoinRateSeeder::class,
+            RewardSeeder::class
         ]);
     }
 }

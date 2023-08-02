@@ -25,17 +25,17 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         $step = $this->stepHistoryRepository->getInToday($user->id);
 
         $data = [
-            'steps' => "$step->steps Steps",
-            'calories' => "$step->calories Calory",
-            'distances' => $step->distances / 100 . " KM",
-            'time_spent' => "$step->time_spent Minute",
+            'steps' => $step->steps,
+            'calories' => $step->calories,
+            'distances' => $step->distances / 100,
+            'time_spent' => $step->time_spent,
         ];
 
-        return response()->json($data);
-        // return view('dashboard');
+        return view('home', compact('data', 'user'));
     }
 
     /**
