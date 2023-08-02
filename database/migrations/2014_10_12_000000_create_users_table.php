@@ -11,6 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('levels', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('limit_step');
+            $table->integer('reward_affiliate');
+            $table->double('price');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,6 +29,10 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('google_id');
+            $table->double('coin');
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('level_id')->references('id')->on('levels');
             $table->timestamps();
         });
     }
@@ -29,6 +42,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('levels');
         Schema::dropIfExists('users');
     }
 };
