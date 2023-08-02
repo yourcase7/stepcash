@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
+
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);

@@ -10,7 +10,7 @@ class Token extends Model
 {
     use HasFactory;
 
-    protected $guaraded = [''];
+    protected $guarded = [''];
 
     public function user(): BelongsTo
     {
