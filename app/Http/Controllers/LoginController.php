@@ -51,7 +51,7 @@ class LoginController extends Controller
                 $this->tokenRepository->update([
                     'token' => $userAuth->token,
                     'refresh_token' => $userAuth->refreshToken,
-                    'expired_at' => now()->addMinutes($userAuth->expiresIn),
+                    'expired_at' => now()->addSeconds($userAuth->expiresIn),
                 ], $findUser->token->id);
 
                 Auth::login($findUser);
@@ -71,7 +71,7 @@ class LoginController extends Controller
                 $this->tokenRepository->create($user, [
                     'token' => $userAuth->token,
                     'refresh_token' => $userAuth->refreshToken,
-                    'expired_at' => now()->addMinutes($userAuth->expiresIn)
+                    'expired_at' => now()->addSeconds($userAuth->expiresIn)
                 ]);
 
                 $this->stepHistoryRepository->create($user, [

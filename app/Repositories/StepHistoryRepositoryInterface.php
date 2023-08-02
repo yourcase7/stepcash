@@ -10,6 +10,10 @@ interface StepHistoryRepositoryInterface
 
     public function getAll();
 
+    public function getByUserId($user_id);
+
+    public function getInToday($user_id);
+
     public function create(User $user, array $data);
 
     public function update(array $data, $id);

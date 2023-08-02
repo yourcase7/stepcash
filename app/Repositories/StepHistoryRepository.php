@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\StepHistory;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\StepHistory;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\StepHistoryRepositoryInterface;
 
@@ -17,7 +18,19 @@ class StepHistoryRepository implements StepHistoryRepositoryInterface
     }
 
     public function getById($id)
-    {}
+    {
+        return $this->model->find($id);
+    }
+
+    public function getByUserId($user_id)
+    {
+        return $this->model->where('user_id', $user_id)->first();
+    }
+
+    public function getInToday($user_id)
+    {
+        return $this->model->where('user_id', $user_id)->whereDate('created_at', Carbon::today())->first();
+    }
 
     public function getAll()
     {}
@@ -30,7 +43,11 @@ class StepHistoryRepository implements StepHistoryRepositoryInterface
     }
 
     public function update(array $data, $id)
-    {}
+    {
+        $step = $this->getById($id);
+
+        return $step->update($data);
+    }
 
     public function delete($id)
     {}

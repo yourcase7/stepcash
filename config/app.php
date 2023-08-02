@@ -187,4 +187,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'google_credentials_path' => env('GOOGLE_CREDENTIALS_PATH')
+
 ];

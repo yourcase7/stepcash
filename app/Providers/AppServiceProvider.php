@@ -9,6 +9,7 @@ use App\Repositories\StepHistoryRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\TokenRepositoryInterface;
 use App\Repositories\StepHistoryRepositoryInterface;
+use App\Services\GoogleApiService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(TokenRepositoryInterface::class, TokenRepository::class);
         $this->app->bind(StepHistoryRepositoryInterface::class, StepHistoryRepository::class);
+
+        $this->app->bind(GoogleApiService::class, function($app){
+            return new GoogleApiService($app->make(TokenRepositoryInterface::class));
+        });
     }
 
     /**
