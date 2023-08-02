@@ -4,17 +4,11 @@ namespace App\Repositories;
 
 use App\Models\User;
 
-interface StepHistoryRepositoryInterface
+interface CoinActivityRepositoryInterface
 {
     public function getById($id);
 
     public function getAll();
-
-    public function getByUserId($user_id);
-
-    public function getInToday($user_id);
-
-    public function getAllTodayNotConvert();
 
     public function create(User $user, array $data);
 

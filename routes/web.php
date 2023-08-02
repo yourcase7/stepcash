@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RewardsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware([
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/sync', [HomeController::class, 'sync'])->name('sync');
+
+    Route::resource('rewards', RewardsController::class);
 });
 
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);

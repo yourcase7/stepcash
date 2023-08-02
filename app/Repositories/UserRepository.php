@@ -16,7 +16,9 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function getById($id)
-    {}
+    {
+        return $this->model->find($id);
+    }
 
     public function getByGoogleId($google_id)
     {
@@ -32,7 +34,25 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function update(array $data, $id)
-    {}
+    {
+
+    }
+
+    public function addCoin(User $user, $coin)
+    {
+        $user = $this->getById($user->id);
+        return $user->update([
+            'coin' => $user->coin + $coin
+        ]);
+    }
+
+    public function cutCoin(User $user, $coin)
+    {
+        $user = $this->getById($user->id);
+        return $user->update([
+            'coin' => $user->coin - $coin
+        ]);
+    }
 
     public function delete($id)
     {}

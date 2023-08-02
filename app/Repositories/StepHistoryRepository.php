@@ -32,6 +32,11 @@ class StepHistoryRepository implements StepHistoryRepositoryInterface
         return $this->model->where('user_id', $user_id)->whereDate('created_at', Carbon::today())->first();
     }
 
+    public function getAllTodayNotConvert()
+    {
+        return $this->model->where('is_convert', 0)->whereDate('created_at', Carbon::today())->get();
+    }
+
     public function getAll()
     {}
 
