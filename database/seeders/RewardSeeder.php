@@ -39,7 +39,7 @@ class RewardSeeder extends Seeder
             Reward::create([
                 'title' => $value,
                 'description' => $value,
-                'thumbnail' => "storage/img/".$dataImage[$row],
+                'thumbnail' => url("image/img/".$dataImage[$row]),
                 'coin' => $row+1*10,
                 'stock' => $row+1,
                 'stock' => $row+1,
