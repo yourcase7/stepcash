@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BonusController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -30,7 +31,11 @@ Route::middleware([
     Route::get('/sync', [HomeController::class, 'sync'])->name('sync');
 
     Route::resource('rewards', RewardsController::class);
-    // Route::get('/rewards/claim/{$id}', [RewardsController::class, 'claim'])->name('rewardclaim');
+    Route::get('/rewards/claim/{$id}', [RewardsController::class, 'claim'])->name('rewardclaim');
+
+    Route::get('/bonus', [BonusController::class, 'index']);
+    Route::get('/bonus/get/{id}', [BonusController::class, 'view']);
+    Route::post('/bonus/get/{id}', [BonusController::class, 'submit']);
 });
 
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
