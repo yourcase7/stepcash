@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('advertisement_id')->references('id')->on('users');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('description')->default('');
+            $table->text('description');
             $table->timestamps();
         });
     }
