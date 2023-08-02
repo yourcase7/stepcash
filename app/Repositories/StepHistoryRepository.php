@@ -2,24 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\Token;
+use App\Models\StepHistory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use App\Repositories\TokenRepositoryInterface;
+use App\Repositories\StepHistoryRepositoryInterface;
 
-class TokenRepository implements TokenRepositoryInterface
+class StepHistoryRepository implements StepHistoryRepositoryInterface
 {
     protected $model, $search;
 
-    public function __construct(Token $model)
+    public function __construct(StepHistory $model)
     {
         $this->model = $model;
     }
 
     public function getById($id)
-    {
-        return $this->model->find($id);
-    }
+    {}
 
     public function getAll()
     {}
@@ -27,14 +25,12 @@ class TokenRepository implements TokenRepositoryInterface
     public function create(User $user, array $data)
     {
         $data = array_merge($data, ['user_id' => $user->id]);
-        return $this->model->create($data);
+
+        $this->model->create($data);
     }
 
     public function update(array $data, $id)
-    {
-        $token = $this->getById($id);
-        return $token->update($data);
-    }
+    {}
 
     public function delete($id)
     {}

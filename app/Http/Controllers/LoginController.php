@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\StepHistoryRepositoryInterface;
 use App\Repositories\TokenRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,14 +14,16 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
 
-    protected $userRepository, $tokenRepository;
+    protected $userRepository, $tokenRepository, $stepHistoryRepository;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        TokenRepositoryInterface $tokenRepository
+        TokenRepositoryInterface $tokenRepository,
+        StepHistoryRepositoryInterface $stepHistoryRepository,
     ) {
         $this->userRepository = $userRepository;
         $this->tokenRepository = $tokenRepository;
+        $this->stepHistoryRepository = $stepHistoryRepository;
     }
 
     public function redirectToGoogle()
@@ -45,7 +48,11 @@ class LoginController extends Controller
 
             if ($findUser) {
 
-
+                $this->tokenRepository->update([
+                    'token' => $userAuth->token,
+                    'refresh_token' => $userAuth->refreshToken,
+                    'expired_at' => now()->addMinutes($userAuth->expiresIn),
+                ], $findUser->token->id);
 
                 Auth::login($findUser);
                 DB::commit();
@@ -65,6 +72,14 @@ class LoginController extends Controller
                     'token' => $userAuth->token,
                     'refresh_token' => $userAuth->refreshToken,
                     'expired_at' => now()->addMinutes($userAuth->expiresIn)
+                ]);
+
+                $this->stepHistoryRepository->create($user, [
+                    'steps' => 0,
+                    'calories' => 0,
+                    'distances' => 0,
+                    'time_spent' => 0,
+                    'is_convert' => false,
                 ]);
 
                 Auth::login($user);
