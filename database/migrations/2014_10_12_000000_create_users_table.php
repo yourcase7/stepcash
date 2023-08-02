@@ -42,7 +42,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('levels');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('levels');
     }
 };
